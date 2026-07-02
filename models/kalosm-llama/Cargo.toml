@@ -32,7 +32,7 @@ kalosm-language-model = { workspace = true, features = ["sample"] }
 kalosm-model-types.workspace = true
 kalosm-common = { workspace = true, features = ["candle", "tokio"] }
 thiserror.workspace = true
-safetensors = "0.4.5"
+safetensors = "0.7.0"
 minijinja = { version = "2.5.0", features = ["json", "loader"] }
 minijinja-contrib = { version = "2.5.0", features = ["pycompat"] }
 chrono = "0.4.41"
