@@ -202,7 +202,7 @@ impl ChatSession for LlamaChatSession {
         }
 
         let tensors = self.session.get_tensor_map(&device);
-        let bytes = safetensors::serialize(&tensors, &None)?;
+        let bytes = safetensors::serialize(&tensors, None)?;
         all_bytes.extend_from_slice(&bytes);
 
         into.extend_from_slice(&all_bytes);

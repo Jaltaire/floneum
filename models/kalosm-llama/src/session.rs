@@ -31,7 +31,7 @@ impl TextCompletionSession for LlamaSession {
     fn write_to(&self, into: &mut Vec<u8>) -> Result<(), Self::Error> {
         let device = accelerated_device_if_available()?;
         let tensors = self.get_tensor_map(&device);
-        let bytes = safetensors::serialize(&tensors, &None)?;
+        let bytes = safetensors::serialize(&tensors, None)?;
         into.extend_from_slice(&bytes);
         Ok(())
     }
