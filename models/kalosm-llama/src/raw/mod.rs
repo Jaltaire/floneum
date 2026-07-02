@@ -400,7 +400,9 @@ impl Model {
                             .map(|norm| decode_norm(norm, rms_norm_eps))
                             .transpose()?,
                         attention_wv: qmatmul_from_qtensor(v)?,
-                        interleaved_rope: architecture != "qwen2" && architecture != "gemma3",
+                        interleaved_rope: architecture != "qwen2"
+                            && architecture != "qwen3"
+                            && architecture != "gemma3",
                         bias,
                     };
                     AttentionVariant::Separate(separate)

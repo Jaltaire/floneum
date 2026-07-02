@@ -37,6 +37,14 @@ fn qwen_tokenizer() -> FileSource {
     )
 }
 
+fn qwen3_tokenizer() -> FileSource {
+    FileSource::huggingface(
+        "Qwen/Qwen3-0.6B".to_string(),
+        "main".to_string(),
+        "tokenizer.json".to_string(),
+    )
+}
+
 #[derive(Debug, serde::Deserialize)]
 pub(crate) struct LlamaConfigJson {
     pub(crate) rope_scaling: Option<RopeScalingConfig>,
@@ -620,6 +628,48 @@ impl LlamaSource {
         ))
         .with_tokenizer(llama_tokenizer())
         .with_group_query_attention(1)
+    }
+
+    /// A preset for the Qwen3-0.6B Chat model
+    ///
+    /// This model supports "thinking mode" which can be enabled via the `/think` and `/no_think`
+    /// soft switches in the user message. The model wraps reasoning in `<think>...</think>` blocks.
+    pub fn qwen_3_0_6b_instruct() -> Self {
+        Self::new(FileSource::huggingface(
+            "unsloth/Qwen3-0.6B-GGUF".to_string(),
+            "main".to_string(),
+            "Qwen3-0.6B-Q4_K_M.gguf".to_string(),
+        ))
+        .with_tokenizer(qwen3_tokenizer())
+        .with_group_query_attention(2)
+    }
+
+    /// A preset for the Qwen3-1.7B Chat model
+    ///
+    /// This model supports "thinking mode" which can be enabled via the `/think` and `/no_think`
+    /// soft switches in the user message. The model wraps reasoning in `<think>...</think>` blocks.
+    pub fn qwen_3_1_7b_instruct() -> Self {
+        Self::new(FileSource::huggingface(
+            "unsloth/Qwen3-1.7B-GGUF".to_string(),
+            "main".to_string(),
+            "Qwen3-1.7B-Q4_K_M.gguf".to_string(),
+        ))
+        .with_tokenizer(qwen3_tokenizer())
+        .with_group_query_attention(2)
+    }
+
+    /// A preset for the Qwen3-4B Chat model
+    ///
+    /// This model supports "thinking mode" which can be enabled via the `/think` and `/no_think`
+    /// soft switches in the user message. The model wraps reasoning in `<think>...</think>` blocks.
+    pub fn qwen_3_4b_instruct() -> Self {
+        Self::new(FileSource::huggingface(
+            "unsloth/Qwen3-4B-GGUF".to_string(),
+            "main".to_string(),
+            "Qwen3-4B-Q4_K_M.gguf".to_string(),
+        ))
+        .with_tokenizer(qwen3_tokenizer())
+        .with_group_query_attention(4)
     }
 
     /// A preset for the SOLAR 10.7B model
